@@ -1,21 +1,32 @@
 // imports always go first - if we're importing anything
 import ChatMessage from "./modules/ChatMessage.js"
 
-const socket = io();
+const   socket = io(),
+        sentMsg = new Audio('../media/sentMsg.mp3'),
+        gotMsg = new Audio('../media/gotMsg.mp3'),
+        userLeft = new Audio('../media/userLeft.mp3'),
+        newUser = new Audio('../media/newUser.mp3');
 
-function setUserId({sID, message}) {
+function sayHi(packet) {
     // debugger;
-    // check my id
+    console.log(packet);
+    newUser.play();
+}
+
+function setUserId({sID}) {
+    // debugger;
     vm.socketID = sID;
 }
 
 function runDisconnectMessage(packet) {
-    // debugger;
+    // debugger;   
     console.log(packet);
+    userLeft.play();
 }
 
 function appendNewMessage(msg) {
     vm.messages.push(msg);
+    sentMsg.play();
 }
 
 // vue instance
@@ -53,5 +64,6 @@ const vm = new Vue({
 }).$mount("#app");
 
 socket.addEventListener('connected', setUserId);
+socket.addEventListener('new_connect', sayHi);
 socket.addEventListener('user_disconnect', runDisconnectMessage);
 socket.addEventListener('new_message', appendNewMessage);
