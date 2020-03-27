@@ -28,6 +28,12 @@ io.on('connection', function(socket) {
     io.emit('new_connect', message);
     socket.emit('connected', {sID: `${socket.id}`})
 
+    socket.on('get_name', function(name) {
+        message = name;
+        io.emit('got_name', message);
+        console.log(name);
+    })
+
     socket.on("chat_message", function(msg) {
         console.log(msg);
         io.emit("new_message", { id: socket.id, message: msg})
