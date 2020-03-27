@@ -14,8 +14,11 @@
 <body>
 	<main id="app">
 		<section class="form-container">
-			<label for="nickname">Your Nickname (optional)</label>
-			<input v-model="nickName" type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
+            <div id="nameSet">
+                <label for="nickname">Your Nickname (optional)</label>
+                <input v-model="nickName" type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
+                <input @click.prevent="getName" type="submit">
+            </div>
 
 			<form>
 				<label for="message">Something to say?</label>
@@ -25,10 +28,11 @@
 		</section>
 
 		<section class="messages">
+            <!-- <p id="welcome">Welcome to ChatApp</p> -->
 			<ul id="messages" v-for="message in messages">
                 <!-- render a new message component for every message -->
                 <newmessage :msg="message"></newmessage>
-			</ul>
+            </ul>
 		</section>
 	</main>
 	<script src="/socket.io/socket.io.js"></script>
