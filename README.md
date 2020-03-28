@@ -26,6 +26,7 @@ To install: `npm install`
 * **Sandra** - *Back-End* - https://github.com/SandraTsao
 
 ## Acknowledgment/References
+- https://socket.io/
 
 ## Future Plans
-- ?
+- pass the nickName to disconnect
