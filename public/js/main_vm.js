@@ -1,17 +1,19 @@
 // imports always go first - if we're importing anything
 import ChatMessage from "./modules/ChatMessage.js"
+(() => {
 
 const   socket = io(),
         sentMsg = new Audio('../media/sentMsg.mp3'),
         gotMsg = new Audio('../media/gotMsg.mp3'),
         userLeft = new Audio('../media/userLeft.mp3'),
         newUser = new Audio('../media/newUser.mp3'),
-        anno = document.createElement("p");
+        anno = document.createElement("p"),
+        nameSetB = document.querySelector('#nameSetB'),
+        namePanel = document.querySelector('#nameSet');
 
 function sayHi(packet) {
     // debugger;
     console.log(packet);
-    
 }
 
 function welcome(packet) {
@@ -32,12 +34,16 @@ const vm = new Vue({
         socketID: "",
         messages: [],
         message: "",
-        nickName: ""
+        nickName: "",
+        nameSet: false
     },
 
     methods: {
         getName() {
             console.log("get name");
+            // namePanel.classList.add("hidden");
+            // console.log("name panel closed");
+            this.nameSet = true;
             // socket.emit('get_name', {
                 // name: this.nickName || "anonymous"
                 // || is double pipe operator or and "or" operator
@@ -96,3 +102,5 @@ socket.addEventListener('new_connect', sayHi);
 socket.addEventListener('got_name', welcome);
 socket.addEventListener('user_disconnect', runDisconnectMessage);
 socket.addEventListener('new_message', appendNewMessage);
+
+})();
