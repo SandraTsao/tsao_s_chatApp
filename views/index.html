@@ -7,23 +7,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" type="image/svg" href="/images/favicon.svg">
 	<title>ChatApp</title>
-	<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Handlee%7CLora&display=swap" rel="stylesheet">
 	<script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
 	<main id="app">
 		<section class="form-container">
-            <div id="nameSet">
-                <label for="nickname">Your Nickname (optional)</label>
+            <div id="nameSet" v-if="nameSet == false">
+                <label for="nickname">Your Nickname (if not, will be set to anonymous)</label>
                 <input v-model="nickName" type="text" id="nickname" class="nickname" placeholder="What is your nickname?">
-                <input @click.prevent="getName" type="submit">
+                <input @click.prevent="getName" id="nameSetB" type="submit">
             </div>
 
 			<form>
-				<label for="message">Something to say?</label>
+				<label for="message">Say something: </label>
 				<textarea v-model="message" class="message" type="text" autocomplete="off" id="textarea"></textarea>
-				<input @click.prevent="dispatchMessage" type="submit">
+				<input @click.prevent="dispatchMessage" type="submit" value="send">
 			</form>
 		</section>
 
